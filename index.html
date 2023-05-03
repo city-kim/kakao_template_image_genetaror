@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url(https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+    #kakaoPreview{ font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+    #kakaoPreview pre{ font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+    .kakao-black-text{ color: #232006 }
+    .kakao-contents{ color: #0A0B0B }
+    .kakao-subtitle{ color: #868686 }
+
+    .kakao-yellow-bg{ background-color: #fce614 }
+    .kakao-template-bg{ background-color: #b2c7da }
+    .kakao-image-bg{ background-color: #f9f9f9 }
+    .kakao-button-bg{ background-color: #f5f5f5 }
+    .btn {display: inline-block;border-radius: 0.25rem;border-width: 1px;--tw-border-opacity: 1;border-color: rgb(209 213 219 / var(--tw-border-opacity));text-align: center;font-weight: 600;padding-left: 1.25rem;padding-right: 1.25rem;padding-top: 0.625rem;padding-bottom: 0.625rem;}
+    .btn-primary {--tw-border-opacity: 1;border-color: rgb(59 130 246 / var(--tw-border-opacity));--tw-bg-opacity: 1;background-color: rgb(59 130 246 / var(--tw-bg-opacity)) !important;--tw-text-opacity: 1;color: rgb(255 255 255 / var(--tw-text-opacity));}
+    .btn-outline-primary {--tw-border-opacity: 1;border-color: rgb(59 130 246 / var(--tw-border-opacity));--tw-bg-opacity: 1;background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;--tw-text-opacity: 1;color: rgb(59 130 246 / var(--tw-text-opacity));}
+    .btn-danger {--tw-border-opacity: 1;border-color: rgb(239 68 68 / var(--tw-border-opacity));--tw-bg-opacity: 1;background-color: rgb(239 68 68 / var(--tw-bg-opacity)) !important;--tw-text-opacity: 1;color: rgb(255 255 255 / var(--tw-text-opacity));}
+    .btn-outline-danger {--tw-border-opacity: 1;border-color: rgb(239 68 68 / var(--tw-border-opacity));--tw-text-opacity: 1;color: rgb(239 68 68 / var(--tw-text-opacity));}
+    .btn-outline-gray {--tw-border-opacity: 1;border-color: rgb(107 114 128 / var(--tw-border-opacity));--tw-text-opacity: 1;color: rgb(107 114 128 / var(--tw-text-opacity));}
+    .btn-sm {display: inline-block;border-radius: 0.25rem;border-width: 1px;--tw-border-opacity: 1;border-color: rgb(209 213 219 / var(--tw-border-opacity));text-align: center;font-weight: 600;padding-left: 0.875rem;padding-right: 0.875rem;padding-top: 0.5rem;padding-bottom: 0.5rem;}
+    .btn:disabled {background-color: rgb(209 213 219 / var(--tw-bg-opacity));color: rgb(255 255 255 / var(--tw-text-opacity));--tw-border-opacity: 1;border-color: rgb(209 213 219 / var(--tw-border-opacity));--tw-bg-opacity: 1;background-color: rgb(255 255 255 / var(--tw-bg-opacity));--tw-text-opacity: 1;color: rgb(209 213 219 / var(--tw-text-opacity));}
+    .input {width: 100%;border-radius: 0.25rem;border-width: 1px;--tw-border-opacity: 1;border-color: rgb(209 213 219 / var(--tw-border-opacity));--tw-bg-opacity: 1;background-color: rgb(255 255 255 / var(--tw-bg-opacity));padding: 0.625rem;outline: 2px solid transparent;outline-offset: 2px;}
+    .input-search {width: 100%;border-radius: 0.25rem;border-width: 1px;--tw-border-opacity: 1;border-color: rgb(209 213 219 / var(--tw-border-opacity));--tw-bg-opacity: 1;background-color: rgb(255 255 255 / var(--tw-bg-opacity));padding: 0.625rem;outline: 2px solid transparent;outline-offset: 2px;background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%234b5563' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");background-size: 1rem;background-position: calc(1rem) center;background-repeat: no-repeat;padding-left: 2.5rem;}
+    .input-fieldset label {display: inline-block;padding-bottom: 0.5rem;font-weight: 700;--tw-text-opacity: 1;color: rgb(55 65 81 / var(--tw-text-opacity));}
+    .input-fieldset.input,.input-fieldset select, .input-fieldset textarea {width: 100%;border-radius: 0.25rem;border-width: 1px;--tw-border-opacity: 1;border-color: rgb(209 213 219 / var(--tw-border-opacity));--tw-bg-opacity: 1;background-color: rgb(255 255 255 / var(--tw-bg-opacity));padding: 0.625rem;outline: 2px solid transparent;outline-offset: 2px;--tw-text-opacity: 1;color: rgb(55 65 81 / var(--tw-text-opacity));}
+    .input-fieldset.input::-moz-placeholder, .input-fieldset select::-moz-placeholder, .input-fieldset textarea::-moz-placeholder {--tw-text-opacity: 1;color: rgb(156 163 175 / var(--tw-text-opacity));}
+    .input-fieldset.input:-ms.input-placeholder, .input-fieldset select:-ms.input-placeholder, .input-fieldset textarea:-ms.input-placeholder {--tw-text-opacity: 1;color: rgb(156 163 175 / var(--tw-text-opacity));}
+    .input-fieldset.input::placeholder, .input-fieldset select::placeholder, .input-fieldset textarea::placeholder {--tw-text-opacity: 1;color: rgb(156 163 175 / var(--tw-text-opacity));}
+    .input-fieldset .text-contents {width: 100%;border-radius: 0.25rem;border-width: 1px;--tw-border-opacity: 1;border-color: rgb(209 213 219 / var(--tw-border-opacity));--tw-bg-opacity: 1;background-color: rgb(255 255 255 / var(--tw-bg-opacity));padding: 0.625rem;outline: 2px solid transparent;outline-offset: 2px;}
+    .input-fieldset.valid.input, .input-fieldset.valid .text-contents, .input-fieldset.valid textarea, .input-fieldset.valid select, .input-fieldset.invalid.input, .input-fieldset.invalid .text-contents, .input-fieldset.invalid textarea, .input-fieldset.invalid select {background-size: 1.5rem;background-position: calc(100% - 1rem) center;background-repeat: no-repeat;}
+    .input-fieldset.valid.input, .input-fieldset.valid .text-contents, .input-fieldset.valid textarea {--tw-border-opacity: 1;border-color: rgb(22 163 74 / var(--tw-border-opacity));background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2316a34a' viewBox='0 0 16 16'%3E%3Cpath d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");--tw-text-opacity: 1;color: rgb(22 163 74 / var(--tw-text-opacity));}
+    .input-fieldset.invalid.input, .input-fieldset.invalid .text-contents, .input-fieldset.invalid textarea, .input-fieldset.invalid select {--tw-border-opacity: 1;border-color: rgb(220 38 38 / var(--tw-border-opacity));background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23dc2626' viewBox='0 0 16 16'%3E%3Cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3E%3Cpath d='M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z'/%3E%3C/svg%3E");--tw-text-opacity: 1;color: rgb(220 38 38 / var(--tw-text-opacity));}
+    .input-fieldset.invalid .invalid-notice {margin-top: 0.25rem;--tw-text-opacity: 1;color: rgb(220 38 38 / var(--tw-text-opacity));}
+  </style> 
+</head>
+<body>
+<div id="app">
+  <div class="w-full max-w-screen-xl mt-20 mx-auto">
+    <div class="flex gap-5 py-5">
+      <p>메시지유형: {{toKorean('message', templateData.templtMessageType)}}</p>
+      <p>강조유형: {{toKorean('emphasis', templateData.templtEmphasizeType)}}</p>
+      <p>글자수: {{textCounter}}자</p>
+    </div>
+    <div class="flex gap-5">
+      <div class="w-[560px] p-20 kakao-template-bg">
+        <div id="kakaoPreview" class="border-0 rounded-lg bg-white overflow-auto">
+          <h4 class="p-3.5 kakao-yellow-bg kakao-black-text font-bold">알림톡 도착</h4>
+          <canvas class="w-full"
+            v-show="templateData.templtEmphasizeType == 'IMAGE'"
+            width="800"
+            height="400"
+            ref="imageCanvas"
+          ></canvas>
+          <div class="mt-8 mx-3.5 pb-7 border-b border-gray-100"
+            v-show="templateData.templtEmphasizeType == 'TEXT'"
+          >
+            <p class="kakao-subtitle text-sm whitespace-pre-line">{{templateData.templtSubtitle}}</p>
+            <p class="kakao-contents text-2xl whitespace-pre-line">{{templateData.templtTitle}}</p>
+          </div>
+          <div class="pt-4 px-3.5 pb-3.5">
+            <pre class="kakao-contents whitespace-pre-line break-words">{{templateData.templtContent}}</pre>
+            <div class="mt-4">
+              <pre class="kakao-subtitle whitespace-pre-line break-words">{{templateData.templtExtra}}</pre>
+              <pre class="kakao-subtitle whitespace-pre-line break-words">{{templateData.templtAd}}</pre>
+            </div>
+  
+            <div class="grid gap-2.5 mt-4">
+              <p class="py-4 text-center border-0 rounded kakao-button-bg kakao-contents"
+                v-for="list in buttons"
+              >{{list.name ? list.name : '버튼명'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-auto">
+        <div>
+          <fieldset class="input-fieldset">
+            <label>내용 ({{templateData.templtContent.length}}/{{1000 - (templateData.templtExtra.length + templateData.templtAd.length)}})</label>
+            <textarea class="resize-none"
+              v-model.trim="templateData.templtContent"
+              @input="checkContentsLength('content')"
+            ></textarea>
+            <p class="text-red-500">{{errorList.templtContent}}</p>
+          </fieldset>
+          <fieldset class="input-fieldset">
+            <label>부가정보 ({{templateData.templtExtra.length}}/{{templateData.templtContent.length + templateData.templtAd.length > 500 ? 500 - ((templateData.templtContent.length + templateData.templtAd.length) - 500) : 500}})</label>
+            <textarea class="resize-none"
+              v-model.trim="templateData.templtExtra"
+              @input="checkContentsLength('extra')"
+            ></textarea>
+            <p class="text-red-500">{{errorList.templtExtra}}</p>
+          </fieldset>
+          <fieldset class="input-fieldset">
+            <label>광고 ({{templateData.templtAd.length}}/{{1000 - (templateData.templtContent.length + templateData.templtExtra.length) < 80 ? 1000 - (templateData.templtContent.length + templateData.templtExtra.length) : 80}})</label>
+            <textarea class="resize-none"
+              v-model.trim="templateData.templtAd"
+              @input="checkContentsLength('ad')"
+            ></textarea>
+          </fieldset>
+        </div>
+        <div class="mt-2.5">
+          <h3>버튼</h3>
+          <fieldset class="flex gap-2.5 input-fieldset"
+            v-show="buttons.length < 5"
+          >
+            <select class="flex-auto"
+              v-model="addBtn"
+            >
+              <option value="">버튼을 선택하세요</option>
+              <option v-for="btn in buttonsArray"
+                :value="btn.key"
+              >{{btn.title}}</option>
+            </select>
+            <button class="w-1/3 btn btn-primary"
+              v-show="addBtn"
+              type="button"
+              @click="addButton()"
+            >버튼 추가하기</button>
+          </fieldset>
+          <div class="grid gap-2.5">
+            <div class="p-2.5 border border-gray-300 bg-gray-100"
+              v-for="(btn) in buttons"
+            >
+              <fieldset class="grid grid-cols-3 gap-2.5 input-fieldset items-center">
+                <label>{{buttonName(btn.linkType)}}</label>
+                <input class="col-span-2 input"
+                  type="text"
+                  v-model="btn.name"
+                />
+              </fieldset>
+              <div v-for="(value, name) in btn.parameter">
+                <fieldset class="input-fieldset">
+                  <label>{{buttonName(name)}}</label>
+                  <input type="text"
+                    class="input"
+                    v-model.trim="btn.parameter[name]"
+                  />
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-2.5">
+          <h3>강조유형</h3>
+          <fieldset class="grid grid-cols-3">
+            <label>
+              <input type="radio"
+                v-model="templateData.templtEmphasizeType"
+                value="NONE"
+              />
+              없음
+            </label>
+            <label>
+              <input type="radio"
+                v-model="templateData.templtEmphasizeType"
+                value="TEXT"
+              />
+              강조표기
+            </label>
+            <label>
+              <input type="radio"
+                v-model="templateData.templtEmphasizeType"
+                value="IMAGE"
+              />
+              이미지
+            </label>
+          </fieldset>
+  
+          <div class="mt-2.5">
+            <div class="grid gap-2.5"
+              v-show="templateData.templtEmphasizeType == 'TEXT'"
+            >
+              <fieldset class="input-fieldset">
+                <label>강조표기문구</label>
+                <input type="text"
+                  class="input"
+                  v-model.trim="templateData.templtTitle"
+                  @input="checkTitleLength('title')"
+                />
+                <p class="text-red-500">{{errorList.templtTitle}}</p>
+              </fieldset>
+              <fieldset class="input-fieldset">
+                <label>강조표기 보조문구</label>
+                <input type="text"
+                  class="input"
+                  v-model.trim="templateData.templtSubtitle"
+                  @input="checkTitleLength('subtitle')"
+                />
+                <p class="text-red-500">{{errorList.templtSubtitle}}</p>
+              </fieldset>
+            </div>
+  
+            <div v-show="templateData.templtEmphasizeType == 'IMAGE'">
+              <fieldset class="input-fieldset">
+                <label>이미지 타입을 선택하세요</label>
+                <select v-model="imageType"
+                  @change="changeImageType"
+                >
+                  <option value="">없음</option>
+                  <option v-for="list in imageTypeArray"
+                    :value="list.key"
+                  >{{list.title}}</option>
+                </select>
+              </fieldset>
+              <p class="text-red-500">{{errorList.image}}</p>
+              <label class="w-full mt-2.5 btn btn-primary">
+                이미지 업로드
+                <input class="hidden"
+                  type="file"
+                  ref="mountedImage"
+                  @change="mountImage($event)"
+                />
+              </label>
+              <div class="mt-5">
+                <fieldset class="input-fieldset"
+                  v-show="imageType == 'text'"
+                >
+                  <label>혼합될 텍스트</label>
+                  <textarea class="resize-none"
+                    v-model.trim="imageText"
+                    @change="updateCanvas"
+                  ></textarea>
+                </fieldset>
+                <fieldset class="input-fieldset"
+                  v-show="imageType == 'icon'"
+                >
+                  <label>아이콘 텍스트</label>
+                  <input type="text"
+                    class="input"
+                    v-model.trim="iconText"
+                    @change="updateCanvas"
+                  />
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h2>샘플 이미지 다운로드</h2>
+    <select>
+      <option value="">직접업로드(없음)</option>
+      <option value="logo">로고</option>
+      <option value="icon">아이콘</option>
+      <option value="mixed">텍스트 혼합형</option>
+    </select>
+    <ul>
+      <li></li>
+    </ul>
+  </div>
+</div>
+  
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      templateData: {
+        templtName: '', // 템플릿 이름
+        templtMessageType: 'BA', // 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형)
+        templtEmphasizeType: 'NONE', // 강조 유형 (NONE: 선택안함, TEXT: 강조표기형, IMAGE: 이미지형 )
+        templtContent: '', // 내용
+        templtExtra: '', // 부가정보 (변수불가 url가능)
+        templtAd: '', // 광고문구 (변수불가 url불가)
+        image: '', // 이미지 (IMAGE일 경우 필수)
+        templtTitle: '', // 강조표기 제목 (TEXT일 경우 필수 2줄 23자)
+        templtSubtitle: '', // 강조표기 보조문구 (TEXT일 경우 필수 변수불가)
+      },
+      errorList: { // 에러리스트
+        templtContent: '',
+        templtExtra: '',
+        image: '',
+        templtTitle: '',
+        templtSubtitle: ''
+      },
+      buttons: [], // 버튼 타입 DS: 배송조회, WL: 웹링크, AL: 앱링크, BK: 봇키워드, MD: 메시지전달
+      buttonsArray: [
+        { key: 'DS', title: '배송조회'},
+        { key: 'WL', title: '웹링크'},
+        { key: 'AL', title: '앱링크'},
+        { key: 'BK', title: '봇키워드'},
+        { key: 'MD', title: '메시지전달'},
+      ],
+      imageTypeArray: [
+        { key: 'logo', title: '로고형 이미지' },
+        { key: 'text', title: '텍스트 혼합형 이미지' },
+        { key: 'icon', title: '아이콘형 이미지' }
+      ], // 이미지 타입 리스트
+      imageType: '', // 이미지 타입
+      imageText: '', // 텍스트 혼합형의 텍스트
+      iconText: '', // 아이콘형의 텍스트
+      saveImage: null, // 텍스트 업로드시 반영할 이미지
+      addBtn: '', // 추가될 버튼
+      textCounter: 0, // 텍스트 카운터
+      sampleImageList: { // 예제이미지 다운로드 경로
+        default: [],
+        logo: [],
+        icon: [],
+        mixed: [],
+      }
+    },
+    methods: {
+      checkContentsLength (target) {
+        // 글자수 체크하기 extra = 500자, ad = 80자, 모두합쳐 1000자
+        let totalCount = this.templateData.templtContent.length + this.templateData.templtExtra.length + this.templateData.templtAd.length // 총 카운트
+        if (totalCount > 1000) {
+          // 총 글자수가 1000자를 넘는다면
+          if (target == 'content') {
+            // 내용 1000자에서 부가정보와 광고를 뺀 만큼을 최대 length로
+            this.templateData.templtContent = this.templateData.templtContent.substring(0, 1000 - (this.templateData.templtExtra.length + this.templateData.templtAd.length))
+          } else if (target == 'extra') {
+            // 부가정보 500자에서 본문과 광고를 뺀 만큼이 500보다 작을경우만 적용 이외는 500자
+            let calculate = 1000 - (this.templateData.templtContent.length + this.templateData.templtAd.length)
+            this.templateData.templtExtra = this.templateData.templtExtra.substring(0, calculate > 500 ? 500 : calculate)
+            // templtExtra: '', // 부가정보 (변수불가 url가능)
+          } else if (target == 'ad') {
+            // 광고 80자에서 본문과 부가정보를 뺀 만큼이 80보다 작을경우만 적용 이외는 80자
+            let calculate = 1000 - (this.templateData.templtContent.length + this.templateData.templtExtra.length)
+            this.templateData.templtAd = this.templateData.templtAd.substring(0, calculate > 80 ? 80 : calculate)
+            // templtAd: '', // 광고문구 (변수불가 url불가)
+          }
+          totalCount = this.templateData.templtContent.length + this.templateData.templtExtra.length + this.templateData.templtAd.length
+        }
+      
+        if (this.templateData.templtExtra.length > 0 && this.templateData.templtAd.length > 0) {
+          // 부가정보와 광고추가가 같이 있을경우
+          this.templateData.templtMessageType = 'MI'
+        } else if (this.templateData.templtAd.length > 0) {
+          // 광고만 있을경우
+          this.templateData.templtMessageType = 'AD'
+        } else if (this.templateData.templtExtra.length > 0) {
+          // 부가정보만 있을경우
+          this.templateData.templtMessageType = 'EX'
+        } else {
+          // 아무것도 해당 안할경우 기본형
+          this.templateData.templtMessageType = 'BA'
+        }
+        this.textCounter = totalCount
+      },
+      checkTitleLength (target) {
+        // 강조내용 입력시 글자수제한
+        if (target == 'title') {
+          // 강조 제목 AOS: 2줄 23자, IOS: 2줄 27자
+          this.templateData.templtTitle = this.templateData.templtTitle.substring(0, 23)
+        } else if (target == 'subtitle') {
+          // 강조 보조내용 AOS: 18자, IOS 21자
+          this.templateData.templtSubtitle = this.templateData.templtSubtitle.substring(0, 18)
+        }
+        // templtSubtitle: '', // 강조표기 보조문구 (TEXT일 경우 필수 변수불가)
+      },
+      mountImage (event) {
+        // 이미지 마운트 시키기
+        const file = this.$refs.mountedImage.files[0]
+        if (file) {
+          // 파일이 업로드 된 경우
+          if (file.type.indexOf('image') > -1) {
+            this.saveImage = file
+            event.target.value = null
+            this.updateCanvas()
+          } else {
+            alert('이미지파일을 첨부해주세요')
+          }
+        }
+      },
+      updateCanvas () {
+        // 캔버스 업데이트하기
+        this.clearCanvas()
+        const ctx = this.$refs.imageCanvas.getContext('2d')
+        const img = new Image
+    
+        if (this.saveImage) {
+          // 이미지가 있는경우
+          const vm = this
+          img.onload = function() {
+            if (!vm.imageType) {
+              // 타입이 지정되지 않은경우 직접 업로드
+              if (img.width != 800 || img.height != 400) {
+                // 이미지 크기를 벗어난경우
+                alert('가로 800px 세로 400px 의 이미지만 첨부할 수 있습니다')
+              } else if (img.width < 260 || img.height < 50) {
+                alert('가로 260px 세로 50px 이상의 이미지만 첨부할 수 있습니다')
+              } else {
+                ctx.drawImage(img, 0, 0)
+              }
+            } else if (vm.imageType == 'logo') {
+              // 로고를 업로드 한 경우
+              if (img.width > 600 || img.height > 150) {
+                // 이미지 크기를 초과한경우
+                alert('가로 600px 세로 150px 이하의 이미지만 첨부할 수 있습니다')
+              } else {
+                ctx.drawImage(img,
+                  vm.$refs.imageCanvas.width / 2 - img.width / 2,
+                  vm.$refs.imageCanvas.height / 2 - img.height / 2
+                )
+              }
+            } else if (vm.imageType == 'text') {
+              // 텍스트 혼합형인경우
+              let isFail = false
+              let coordinate = { // 좌표
+                x: vm.$refs.imageCanvas.width - img.width - 20,
+                y: vm.$refs.imageCanvas.height - img.height - 16
+              }
+              if (img.width < 230 || img.height < 230) {
+                // 이미지 크기가 230 미만인경우
+                if (img.width != 180 || img.height != 180) {
+                  // 이미지 크기가 180이 아니라면 에러
+                  isFail = true
+                  alert('아이콘을 첨부하실 경우 가로 180px 세로 180px의 이미지만 첨부할 수 있습니다')
+                }
+              } else {
+                if (img.width > 400 || img.height > 320) {
+                  // 이미지 크기가 400x320을 초과하는경우
+                  isFail = true
+                  alert('일러스트 또는 오브젝트는 가로 400px 세로 320px 이하의 이미지만 첨부할 수 있습니다')
+                } else {
+                  if (img.width == 400 || img.height == 320) {
+                    // 이미지의 크기중 하나라도 최대크기에 만족하는경우
+                    coordinate.x += 20
+                    coordinate.y += 16
+                  }
+                }
+              }
+              if (!isFail) {
+                // 실패가 없는경우에만
+                ctx.drawImage(img, coordinate.x, coordinate.y)
+              }
+            } else if (vm.imageType == 'icon') {
+              if (img.width == 180 && img.height == 180) {
+                // 이미지 크기가 180일경우
+                ctx.drawImage(img, vm.$refs.imageCanvas.width / 2 - img.width / 2, 76)
+              } else {
+                alert('아이콘을 첨부하실 경우 가로 180px 세로 180px의 이미지만 첨부할 수 있습니다')
+              }
+            }
+            URL.revokeObjectURL(img.src)
+          }
+          img.src = URL.createObjectURL(this.saveImage)
+        }
+        if (this.imageType == 'text' || this.imageType =='icon') {
+          // 텍스트 또는 아이콘형일 경우
+          ctx.fillStyle = '#333333'
+          ctx.font = 'bold 54px Spoqa Han Sans Neo'
+          if (this.imageType == 'text') {
+            let textArray = this.imageText.split(/\n/gi)
+            if (textArray.length > 2) {
+              // 2줄을 초과한경우
+              alert('텍스트는 최대 2줄 20자만 노출되도록 해주세요')
+            }
+            ctx.textAlign = 'left'
+            for (let i=0; i<3; i++) {
+              if (textArray[i]) {
+                ctx.fillText(textArray[i].substring(0, 10), 36, (54 * (i + 1)) + (16 * i) + 42);
+              }
+            }
+          } else {
+            if (this.iconText.length > 9) {
+              alert('텍스트는 9자 이하로 입력해주세요')
+            } else {
+              ctx.textAlign = 'center'
+              ctx.fillText(this.iconText, this.$refs.imageCanvas.width / 2, 76 + 180 + 68)
+            }
+          }
+        }
+      },
+      changeImageType () {
+        // 이미지 타입이 변경되면 저장된 이미지와 텍스트 캔버스 모두 초기화하기
+        this.saveImage = null
+        this.imageText = ''
+        this.iconText = ''
+        this.clearCanvas()
+      },
+      clearCanvas () {
+        // 캔버스 초기화 시키기
+        const ctx = this.$refs.imageCanvas.getContext('2d')
+        ctx.fillStyle = '#F9F9F9'
+        ctx.fillRect(0, 0, this.$refs.imageCanvas.width, this.$refs.imageCanvas.height)
+      },
+      addButton () {
+        if (!this.addBtn) {
+          alert('추가할 버튼을 선택하세요')
+        } else {
+          let addTemp = {
+            name: '',
+            linkType: this.addBtn,
+            parameter: {}
+          }
+          if (this.addBtn == 'WL') {
+            addTemp.parameter.linkM = ''
+            addTemp.parameter.linkP = ''
+          } else if (this.addBtn == 'AL') {
+            addTemp.parameter.linkM = ''
+            addTemp.parameter.linkP = ''
+            addTemp.parameter.linkA = ''
+            addTemp.parameter.linkI = ''
+          }
+          this.buttons.push(addTemp)
+          this.addBtn = ''
+        }
+      },
+      buttonName (target) {
+        const names = {
+          name: '버튼명',
+          DS: '배송조회',
+          WL: '웹링크',
+          AL: '앱링크',
+          BK: '봇키워드',
+          MD: '메시지전달',
+          linkM: '모바일 웹링크주소',
+          linkP: 'PC 웹링크주소',
+          linkI: 'IOS 앱링크주소',
+          linkA: 'Android 앱링크주소',
+        }
+        return names[target]
+      },
+      toKorean (type, target) {
+        let translation = {
+          message: {
+            BA: '기본형',
+            EX: '부가 정보형',
+            AD: '광고 추가형',
+            MI: '복합형',
+          },
+          emphasis: {
+            NONE: '선택안함',
+            TEXT: '강조표기형',
+            IMAGE: '이미지형',
+          }
+        }
+        return translation[type][target]
+      }
+    }
+  })
+  
+  // const test = ref('') // 출력테스트용
+  // submit () {
+  //   imageCanvas.toBlob((blob: Blob) => {
+  //     const link = URL.createObjectURL(blob)
+  //     console.log(blob)
+  //     test.value = link
+  //   },'image/png')
+  // }
+  
+  
+  </script>       
+</body>
+</html>
